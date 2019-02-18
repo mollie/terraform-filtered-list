@@ -68,6 +68,7 @@ The output will be available as `filtered_list`.
 ## Usage
 If you encounter the following error:
 > should be a list
+
 You'll need to add `[]` around the output, for terraform to work properly.
 ```
 list = ["${module.selection.filtered_list}"]
