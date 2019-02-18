@@ -1,22 +1,22 @@
 locals {
-    # Include Filter
-    use_include = "${length(var.include) > 0 ? 1 : 0}"
-    include_input = "${distinct(var.input)}"
+    # Intersect Filter
+    use_intersect = "${length(var.intersect) > 0 ? 1 : 0}"
+    intersect_input = "${distinct(var.input)}"
 
     # Exclude Filter
     use_exclude = "${length(var.exclude) > 0 ? 1 : 0}"
-    exclude_input = "${compact(data.template_file.include.*.rendered)}"
+    exclude_input = "${compact(data.template_file.intersect.*.rendered)}"
 
     # Output
     filtered_list = "${compact(data.template_file.exclude.*.rendered)}"
 }
 
-data "template_file" "include" {
+data "template_file" "intersect" {
   # Render the template once for each item
-  count    = "${length(local.include_input)}"
+  count    = "${length(local.intersect_input)}"
   template = "$${value}"
   vars {
-    value = "${ !local.use_include || local.use_include && contains(var.include, local.include_input[count.index]) ? local.include_input[count.index] : ""}"
+    value = "${ !local.use_intersect || local.use_intersect && contains(var.intersect, local.intersect_input[count.index]) ? local.intersect_input[count.index] : ""}"
   }
 }
 

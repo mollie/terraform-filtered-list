@@ -3,10 +3,10 @@ variable "input" {
     description = "The input list"
 }
 
-variable "include" {
+variable "intersect" {
     type = "list"
     default = []
-    description = "The include list, returns all items from input that are also in this list"
+    description = "The intersect list, returns all items from input that are also in this list"
 }
 
 variable "exclude" {

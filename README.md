@@ -3,18 +3,18 @@ Let's say we have three lists:
 ```
 locals {
     input = [ "a", "b", "c", "d", "e" ]
-    include = [ "d", "e", "f" ]
+    intersect = [ "d", "e", "f" ]
     exclude = [ "a", "b", "e" ]
 }
 ```
 
-## Include
-And we want all items that are both in `input` and in `include`
+## Intersect
+And we want all items that are both in `input` and in `intersect`
 ```
 module "selection" {
   source = "git::ssh://git@github.com/TheWolfNL/terraform-filtered-list.git"
   input = "${local.input}"
-  include = "${local.include}"
+  intersect = "${local.intersect}"
 }
 ```
 Then the output would be:
@@ -42,13 +42,13 @@ Then the output would be:
     ]
 ```
 
-## Include and Exclude
-Now we'd like all items that are both in `input` and in `include` and **NOT** in `exclude`
+## Intersect and Exclude
+Now we'd like all items that are both in `input` and in `intersect` and **NOT** in `exclude`
 ```
 module "selection" {
   source = "git::ssh://git@github.com/TheWolfNL/terraform-filtered-list.git"
   input = "${local.input}"
-  include = "${local.include}"
+  intersect = "${local.intersect}"
   exclude = "${local.exclude}"
 }
 ```
