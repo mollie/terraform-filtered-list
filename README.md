@@ -12,7 +12,7 @@ locals {
 And we want all items that are both in `input` and in `intersect`
 ```
 module "selection" {
-  source = "git::ssh://git@github.com/TheWolfNL/terraform-filtered-list.git"
+  source = "git::ssh://git@github.com/mollie/terraform-filtered-list.git"
   input = "${local.input}"
   intersect = "${local.intersect}"
 }
@@ -29,7 +29,7 @@ Then the output would be:
 And now we want all items that are in `input` and **NOT** in `exclude`
 ```
 module "selection" {
-  source = "git::ssh://git@github.com/TheWolfNL/terraform-filtered-list.git"
+  source = "git::ssh://git@github.com/mollie/terraform-filtered-list.git"
   input = "${local.input}"
   exclude = "${local.exclude}"
 }
@@ -46,7 +46,7 @@ Then the output would be:
 Now we'd like all items that are both in `input` and in `intersect` and **NOT** in `exclude`
 ```
 module "selection" {
-  source = "git::ssh://git@github.com/TheWolfNL/terraform-filtered-list.git"
+  source = "git::ssh://git@github.com/mollie/terraform-filtered-list.git"
   input = "${local.input}"
   intersect = "${local.intersect}"
   exclude = "${local.exclude}"
