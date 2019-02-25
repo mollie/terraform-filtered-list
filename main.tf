@@ -1,10 +1,12 @@
 locals {
     # Intersect Filter
-    use_intersect = "${length(var.intersect) > 0 && var.intersect[0] != "" ? true : false}"
+    use_intersect = "${length(var.intersect) > 0 ? true : false}"
+    # use_intersect = "${length(var.intersect) > 0 && var.intersect[0] != "" ? true : false}"
     intersect_input = "${distinct(var.input)}"
 
     # Exclude Filter
-    use_exclude = "${length(var.exclude) > 0 && var.exclude[0] != "" ? true : false}"
+    use_exclude = "${length(var.exclude) > 0 ? true : false}"
+    # use_exclude = "${length(var.exclude) > 0 && var.exclude[0] != "" ? true : false}"
     exclude_input = "${compact(data.template_file.intersect.*.rendered)}"
 
     # Output
