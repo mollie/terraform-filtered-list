@@ -75,6 +75,6 @@ list = ["${module.selection.filtered_list}"]
 ```
 
 ## Tests
-To run the tests make sure this dir is under the $GOPATH (or create a symlink) 
-Run `make dev-install` to have the dependencies installed if not present.
-Run `make tests` to trigger tests.
+To run the tests make sure this dir is under the $GOPATH (or create a symlink)
+- Run `make dev-install` to have the dependencies installed if not present.
+- Run `make tests` to trigger tests.
