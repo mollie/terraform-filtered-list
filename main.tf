@@ -1,12 +1,12 @@
 locals {
     # Intersect Filter
-    use_intersect = "${length(var.intersect) > 0 ? true : false}"
-    # use_intersect = "${length(var.intersect) > 0 && var.intersect[0] != "" ? true : false}"
+    intersect = "${flatten(list(var.intersect))}"
+    use_intersect = "${length(local.intersect) > 0 ? true : false}"
     intersect_input = "${distinct(var.input)}"
 
     # Exclude Filter
+    exclude = "${flatten(list(var.exclude))}"
     use_exclude = "${length(var.exclude) > 0 ? true : false}"
-    # use_exclude = "${length(var.exclude) > 0 && var.exclude[0] != "" ? true : false}"
     exclude_input = "${compact(data.template_file.intersect.*.rendered)}"
 
     # Output
@@ -18,7 +18,7 @@ data "template_file" "intersect" {
   count    = "${length(local.intersect_input)}"
   template = "$${value}"
   vars {
-    value = "${ !local.use_intersect || local.use_intersect && contains(var.intersect, local.intersect_input[count.index]) ? local.intersect_input[count.index] : ""}"
+    value = "${ !local.use_intersect || local.use_intersect && contains(local.intersect, local.intersect_input[count.index]) ? local.intersect_input[count.index] : ""}"
   }
 }
 
@@ -27,6 +27,6 @@ data "template_file" "exclude" {
   count    = "${length(local.exclude_input)}"
   template = "$${value}"
   vars {
-    value = "${ !local.use_exclude || local.use_exclude && !contains(var.exclude, local.exclude_input[count.index]) ? local.exclude_input[count.index] : ""}"
+    value = "${ !local.use_exclude || local.use_exclude && !contains(local.exclude, local.exclude_input[count.index]) ? local.exclude_input[count.index] : ""}"
   }
 }
